@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">DicodingEvent</string>
+    <string name="date_amp_time"><![CDATA[DATE & TIME]]></string>
+    <string name="remaining_slots">REMAINING SLOTS</string>
+    <string name="about_this_event">About this event</string>
+    <string name="register_now">REGISTER NOW</string>
+    <string name="home">Home</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="finished">Finished</string>
+    <string name="finished_events">Finished Events</string>
+    <string name="search_events">Search Events</string>
+    <string name="dicoding_event">Dicoding Event</string>
+    <string name="upcoming_events">Upcoming Events</string>
+    <string name="view_all">View All</string>
+    <string name="history">History</string>
+    <string name="completed">COMPLETED</string>
+
+    <string name="start_time">Mulai: %1$s</string>
+    <string name="end_time">Selesai: %1$s</string>
+    <string name="event_schedule">%1$s\n%2$s</string>
+    <string name="quota_display">%1$d / %2$d</string>
+
+    <!-- Content Descriptions -->
+    <string name="event_cover_description">Event Cover</string>
+    <string name="back_button_description">Back Button</string>
+    <string name="owner_logo_description">Owner Logo</string>
+    <string name="image_button">Image button</string>
+    <string name="image_logo">Image Logo</string>
+    <string name="image_event_logo">Image Event Logo</string>
+    <string name="icon_arrow">Icon Arrow</string>
+</resources>
