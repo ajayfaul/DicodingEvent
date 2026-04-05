@@ -48,8 +48,7 @@ class HomeFragment : Fragment() {
             intent.putExtra(DetailActivity.EXTRA_EVENT_ID, event.id.toString())
             startActivity(intent)
         }
-        
-        // Di Home, kategori bawah adalah Finished
+
         finishedAdapter = EventVerticalAdapter(isFinished = true) { event ->
             val intent = Intent(requireContext(), DetailActivity::class.java)
             intent.putExtra(DetailActivity.EXTRA_EVENT_ID, event.id.toString())
@@ -67,6 +66,10 @@ class HomeFragment : Fragment() {
         }
 
         setupRecyclerView()
+        setupObserversAndUI()
+    }
+    
+    private fun setupObserversAndUI() {
         setupSearchBar()
         observeViewModel()
     }

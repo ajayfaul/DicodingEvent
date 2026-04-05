@@ -3,7 +3,6 @@ package com.jayfm.dicodingevent.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.jayfm.dicodingevent.data.EventRepository
-import com.jayfm.dicodingevent.di.Injection
 import com.jayfm.dicodingevent.ui.detail.DetailViewModel
 import com.jayfm.dicodingevent.ui.favorite.FavoriteViewModel
 import com.jayfm.dicodingevent.ui.finished.FinishedViewModel

@@ -38,7 +38,6 @@ class EventVerticalAdapter(
                 binding.cardStatus.visibility = View.VISIBLE
                 binding.tvStatus.text = binding.root.context.getString(R.string.completed)
             } else {
-                // Sembunyikan atau ganti teks menjadi UPCOMING jika diinginkan
                 binding.cardStatus.visibility = View.VISIBLE
                 binding.tvStatus.text = binding.root.context.getString(R.string.upcoming)
             }

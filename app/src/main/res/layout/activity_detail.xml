@@ -229,7 +229,7 @@
                         android:lineSpacingExtra="4dp"
                         android:textColor="@color/text_secondary"
                         android:textSize="14sp"
-                        tools:text="Bergabunglah dalam konferensi pengembang terbesar tahun ini..." />
+                        tools:text="@string/bergabunglah_dalam_konferensi_pengembang_terbesar_tahun_ini" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

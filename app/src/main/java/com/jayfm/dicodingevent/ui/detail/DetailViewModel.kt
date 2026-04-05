@@ -10,8 +10,8 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel(private val repository: EventRepository) : ViewModel() {
 
-    private val _eventResult = MutableLiveData<com.jayfm.dicodingevent.data.Result<com.jayfm.dicodingevent.data.remote.response.ListEventsItem>>()
-    val eventResult: LiveData<com.jayfm.dicodingevent.data.Result<com.jayfm.dicodingevent.data.remote.response.ListEventsItem>> = _eventResult
+    private val _eventResult = MutableLiveData<com.jayfm.dicodingevent.data.Result<ListEventsItem>>()
+    val eventResult: LiveData<com.jayfm.dicodingevent.data.Result<ListEventsItem>> = _eventResult
 
     fun getDetailEvent(id: String) {
         viewModelScope.launch {

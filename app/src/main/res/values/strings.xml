@@ -28,8 +28,10 @@
     <string name="event_cover_description">Event Cover</string>
     <string name="back_button_description">Back Button</string>
     <string name="owner_logo_description">Owner Logo</string>
-    <string name="image_button">Image button</string>
     <string name="image_logo">Image Logo</string>
     <string name="image_event_logo">Image Event Logo</string>
     <string name="icon_arrow">Icon Arrow</string>
+    <string name="bergabunglah_dalam_konferensi_pengembang_terbesar_tahun_ini">Bergabunglah dalam konferensi pengembang terbesar tahun ini...</string>
+    <string name="settings">Settings</string>
+    <string name="daily_reminder">Daily Reminder</string>
 </resources>
