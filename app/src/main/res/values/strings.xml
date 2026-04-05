@@ -7,6 +7,7 @@
     <string name="home">Home</string>
     <string name="upcoming">Upcoming</string>
     <string name="finished">Finished</string>
+    <string name="favorite">Favorite</string>
     <string name="finished_events">Finished Events</string>
     <string name="search_events">Search Events</string>
     <string name="dicoding_event">Dicoding Event</string>

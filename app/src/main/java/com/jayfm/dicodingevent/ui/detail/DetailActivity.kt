@@ -20,8 +20,11 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private val viewModel: DetailViewModel by viewModels {
-        ViewModelFactory.getInstance(Injection.provideRepository())
+        ViewModelFactory.getInstance(Injection.provideRepository(this))
     }
+
+    private var eventEntity: com.jayfm.dicodingevent.data.local.entity.FavoriteEventEntity? = null
+    private var isFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +38,31 @@ class DetailActivity : AppCompatActivity() {
 
         binding.btnBack.setOnClickListener { finish() }
 
+        binding.btnFavorite.setOnClickListener {
+            eventEntity?.let { event ->
+                if (isFavorite) {
+                    viewModel.deleteFavorite(event)
+                } else {
+                    viewModel.insertFavorite(event)
+                }
+            }
+        }
+
         observeViewModel()
     }
 
     private fun observeViewModel() {
         viewModel.event.observe(this) { event ->
             displayDetail(event)
+            
+            eventEntity = com.jayfm.dicodingevent.data.local.entity.FavoriteEventEntity(
+                event.id, event.name, event.imageLogo, event.description, event.cityName, event.beginTime
+            )
+            
+            viewModel.getFavoriteById(event.id).observe(this) { fav ->
+                isFavorite = fav != null
+                updateFavoriteIcon()
+            }
         }
 
         viewModel.isLoading.observe(this) { isLoading ->
@@ -51,6 +73,16 @@ class DetailActivity : AppCompatActivity() {
             if (message != null) {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun updateFavoriteIcon() {
+        if (isFavorite) {
+            binding.btnFavorite.setImageResource(R.drawable.ic_favorite)
+            binding.btnFavorite.setColorFilter(getColor(android.R.color.holo_red_dark))
+        } else {
+            binding.btnFavorite.setImageResource(R.drawable.ic_favorite)
+            binding.btnFavorite.setColorFilter(getColor(android.R.color.white))
         }
     }
 

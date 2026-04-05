@@ -24,6 +24,9 @@ class ViewModelFactory(private val repository: EventRepository) : ViewModelProvi
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(repository) as T
             }
+            modelClass.isAssignableFrom(com.jayfm.dicodingevent.ui.favorite.FavoriteViewModel::class.java) -> {
+                com.jayfm.dicodingevent.ui.favorite.FavoriteViewModel(repository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }

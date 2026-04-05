@@ -1,12 +1,16 @@
 <resources>
-    <!-- Base application theme. -->
+    <!-- Base application theme (Dark Mode). -->
     <style name="Base.Theme.DicodingEvent" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorSecondaryContainer">@color/surface</item>
         <item name="colorOnSecondaryContainer">@color/primary</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
 
         <item name="android:statusBarColor">@color/background</item>
         <item name="android:windowBackground">@color/background</item>
     </style>
+
+    <style name="Theme.DicodingEvent" parent="Base.Theme.DicodingEvent" />
 </resources>

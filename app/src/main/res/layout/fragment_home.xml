@@ -29,7 +29,7 @@
             android:layout_marginStart="12dp"
             android:fontFamily="sans-serif-black"
             android:text="@string/dicoding_event"
-            android:textColor="@color/white"
+            android:textColor="@color/primary"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/ivLogo"
             app:layout_constraintStart_toEndOf="@+id/ivLogo"
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/search_events"
                 android:inputType="text"
-                android:textColor="@color/white"
+                android:textColor="@color/text_primary"
                 android:textColorHint="@color/text_secondary" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -86,7 +86,7 @@
             android:layout_marginTop="32dp"
             android:fontFamily="sans-serif-black"
             android:text="@string/upcoming_events"
-            android:textColor="@color/white"
+            android:textColor="@color/text_primary"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchLayout" />
@@ -141,7 +141,7 @@
             android:layout_marginTop="32dp"
             android:fontFamily="sans-serif-black"
             android:text="@string/finished_events"
-            android:textColor="@color/white"
+            android:textColor="@color/text_primary"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rvUpcoming" />

@@ -38,6 +38,19 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/white" />
 
+            <ImageButton
+                android:id="@+id/btnFavorite"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_circle_translucent"
+                android:contentDescription="@string/favorite"
+                android:src="@drawable/ic_favorite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardHeader"
                 android:layout_width="match_parent"
@@ -60,7 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
-                        android:textColor="@color/white"
+                        android:textColor="@color/text_primary"
                         android:textSize="22sp"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="Dicoding Developer Conference 2024" />
@@ -81,7 +94,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:textColor="@color/white"
+                        android:textColor="@color/text_secondary"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="@+id/ivOwnerLogo"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +128,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/date_amp_time"
-                                android:textColor="@color/text_secondary"
+                                android:textColor="@color/text_primary"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
 
@@ -126,7 +139,7 @@
                                 android:layout_marginTop="8dp"
                                 android:drawablePadding="8dp"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/white"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="12sp"
                                 app:drawableStartCompat="@drawable/ic_time"
                                 app:drawableTint="@color/primary"
@@ -149,7 +162,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/remaining_slots"
-                                android:textColor="@color/text_secondary"
+                                android:textColor="@color/text_primary"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
 
@@ -160,7 +173,7 @@
                                 android:layout_marginTop="8dp"
                                 android:drawablePadding="8dp"
                                 android:gravity="center_vertical"
-                                android:textColor="@color/white"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="12sp"
                                 app:drawableStartCompat="@drawable/ic_group"
                                 app:drawableTint="@color/primary"
@@ -204,7 +217,7 @@
                             android:layout_marginStart="12dp"
                             android:fontFamily="sans-serif-black"
                             android:text="@string/about_this_event"
-                            android:textColor="@color/white"
+                            android:textColor="@color/primary"
                             android:textSize="18sp" />
                     </LinearLayout>
 
@@ -232,12 +245,12 @@
         android:layout_marginBottom="24dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/register_now"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:backgroundTint="@color/primary"
         app:cornerRadius="16dp"
         app:icon="@drawable/ic_arrow_forward"
         app:iconGravity="textEnd"
-        app:iconTint="@color/black"
+        app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ProgressBar

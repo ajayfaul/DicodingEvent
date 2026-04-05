@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: HomeViewModel by viewModels {
-        ViewModelFactory.getInstance(Injection.provideRepository())
+        ViewModelFactory.getInstance(Injection.provideRepository(requireContext()))
     }
 
     private lateinit var upcomingAdapter: EventHorizontalAdapter

@@ -22,7 +22,7 @@ class FinishedFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: FinishedViewModel by viewModels {
-        ViewModelFactory.getInstance(Injection.provideRepository())
+        ViewModelFactory.getInstance(Injection.provideRepository(requireContext()))
     }
 
     private lateinit var adapter: EventVerticalAdapter

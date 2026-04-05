@@ -33,4 +33,18 @@ class DetailViewModel(private val repository: EventRepository) : ViewModel() {
             }
         }
     }
+
+    fun getFavoriteById(id: Int) = repository.getFavoriteById(id)
+
+    fun insertFavorite(event: com.jayfm.dicodingevent.data.local.entity.FavoriteEventEntity) {
+        viewModelScope.launch {
+            repository.insertFavorite(event)
+        }
+    }
+
+    fun deleteFavorite(event: com.jayfm.dicodingevent.data.local.entity.FavoriteEventEntity) {
+        viewModelScope.launch {
+            repository.deleteFavorite(event)
+        }
+    }
 }

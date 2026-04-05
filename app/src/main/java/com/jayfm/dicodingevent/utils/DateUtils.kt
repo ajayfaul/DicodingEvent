@@ -22,4 +22,14 @@ object DateUtils {
             dateString
         }
     }
+
+    fun isEventFinished(beginTime: String): Boolean {
+        val apiFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        return try {
+            val date = apiFormat.parse(beginTime)
+            date?.before(java.util.Date()) ?: false
+        } catch (e: Exception) {
+            false
+        }
+    }
 }

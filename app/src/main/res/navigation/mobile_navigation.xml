@@ -21,4 +21,10 @@
         android:name="com.jayfm.dicodingevent.ui.finished.FinishedFragment"
         android:label="Finished"
         tools:layout="@layout/fragment_finished" />
+
+    <fragment
+        android:id="@+id/navigation_favorite"
+        android:name="com.jayfm.dicodingevent.ui.favorite.FavoriteFragment"
+        android:label="Favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>
