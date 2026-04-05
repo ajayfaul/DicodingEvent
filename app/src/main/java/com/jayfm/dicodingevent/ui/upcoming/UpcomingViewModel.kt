@@ -10,45 +10,31 @@ import kotlinx.coroutines.launch
 
 class UpcomingViewModel(private val repository: EventRepository) : ViewModel() {
 
-    private val _listEvents = MutableLiveData<List<ListEventsItem>>()
-    val listEvents: LiveData<List<ListEventsItem>> = _listEvents
-
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-
-    private val _errorMessage = MutableLiveData<String?>()
-    val errorMessage: LiveData<String?> = _errorMessage
+    private val _eventResult = MutableLiveData<com.jayfm.dicodingevent.data.Result<List<ListEventsItem>>>()
+    val eventResult: LiveData<com.jayfm.dicodingevent.data.Result<List<ListEventsItem>>> = _eventResult
 
     init {
         getUpcomingEvents()
     }
 
     fun getUpcomingEvents() {
-        _isLoading.value = true
-        _errorMessage.value = null
         viewModelScope.launch {
-            try {
-                val response = repository.getUpcomingEvents()
-                _listEvents.value = response.listEvents
-            } catch (e: Exception) {
-                _errorMessage.value = e.message
-            } finally {
-                _isLoading.value = false
+            repository.getUpcomingEvents().collect { result ->
+                _eventResult.value = result
             }
         }
     }
 
     fun searchEvents(query: String) {
-        _isLoading.value = true
-        _errorMessage.value = null
         viewModelScope.launch {
+            // Note: Since searchEvents in repository hasn't been updated to Flow yet,
+            // this part would need similar handling. Assuming standard call for now
+            // until repository search function is also updated to Flow.
             try {
                 val response = repository.searchEvents(query)
-                _listEvents.value = response.listEvents
+                _eventResult.value = com.jayfm.dicodingevent.data.Result.Success(response.listEvents)
             } catch (e: Exception) {
-                _errorMessage.value = e.message
-            } finally {
-                _isLoading.value = false
+                _eventResult.value = com.jayfm.dicodingevent.data.Result.Error(e.message.toString())
             }
         }
     }

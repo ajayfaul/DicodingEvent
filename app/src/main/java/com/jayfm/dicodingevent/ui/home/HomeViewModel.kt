@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jayfm.dicodingevent.data.EventRepository
+import com.jayfm.dicodingevent.data.Result
 import com.jayfm.dicodingevent.data.remote.response.ListEventsItem
 import kotlinx.coroutines.launch
 
@@ -38,29 +39,43 @@ class HomeViewModel(private val repository: EventRepository) : ViewModel() {
         
         viewModelScope.launch {
             _isLoadingUpcoming.value = true
-            try {
-                val upcoming = repository.getUpcomingEvents()
-                allUpcomingEvents = upcoming.listEvents
-                _upcomingEvents.value = allUpcomingEvents.take(5)
-            } catch (e: Exception) {
-                _errorMessage.value = e.message
-                Log.e("HomeViewModel", "Error loading upcoming events: ${e.message}")
-            } finally {
-                _isLoadingUpcoming.value = false
+            repository.getUpcomingEvents().collect { result ->
+                when (result) {
+                    is Result.Success -> {
+                        allUpcomingEvents = result.data
+                        _upcomingEvents.value = allUpcomingEvents.take(5)
+                        _isLoadingUpcoming.value = false
+                    }
+                    is Result.Error -> {
+                        _errorMessage.value = result.error
+                        Log.e("HomeViewModel", "Error loading upcoming events: ${result.error}")
+                        _isLoadingUpcoming.value = false
+                    }
+                    is Result.Loading -> {
+                        _isLoadingUpcoming.value = true
+                    }
+                }
             }
         }
 
         viewModelScope.launch {
             _isLoadingFinished.value = true
-            try {
-                val finished = repository.getFinishedEvents()
-                allFinishedEvents = finished.listEvents
-                _finishedEvents.value = allFinishedEvents.take(5)
-            } catch (e: Exception) {
-                _errorMessage.value = e.message
-                Log.e("HomeViewModel", "Error loading finished events: ${e.message}")
-            } finally {
-                _isLoadingFinished.value = false
+            repository.getFinishedEvents().collect { result ->
+                when (result) {
+                    is Result.Success -> {
+                        allFinishedEvents = result.data
+                        _finishedEvents.value = allFinishedEvents.take(5)
+                        _isLoadingFinished.value = false
+                    }
+                    is Result.Error -> {
+                        _errorMessage.value = result.error
+                        Log.e("HomeViewModel", "Error loading finished events: ${result.error}")
+                        _isLoadingFinished.value = false
+                    }
+                    is Result.Loading -> {
+                        _isLoadingFinished.value = true
+                    }
+                }
             }
         }
     }

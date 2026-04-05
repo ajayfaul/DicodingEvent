@@ -21,6 +21,9 @@
     <string name="event_schedule">%1$s\n%2$s</string>
     <string name="quota_display">%1$d / %2$d</string>
 
+    <!-- Settings -->
+    <string name="switch_theme">Switch Theme</string>
+
     <!-- Content Descriptions -->
     <string name="event_cover_description">Event Cover</string>
     <string name="back_button_description">Back Button</string>

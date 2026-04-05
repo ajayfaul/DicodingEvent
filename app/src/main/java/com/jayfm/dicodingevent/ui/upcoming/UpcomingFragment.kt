@@ -67,17 +67,19 @@ class UpcomingFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.listEvents.observe(viewLifecycleOwner) { events ->
-            adapter.submitList(events)
-        }
-
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-        }
-
-        viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
-            if (message != null) {
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        viewModel.eventResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is com.jayfm.dicodingevent.data.Result.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is com.jayfm.dicodingevent.data.Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    adapter.submitList(result.data)
+                }
+                is com.jayfm.dicodingevent.data.Result.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

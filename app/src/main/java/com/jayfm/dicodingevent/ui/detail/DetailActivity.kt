@@ -20,7 +20,7 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private val viewModel: DetailViewModel by viewModels {
-        ViewModelFactory.getInstance(Injection.provideRepository(this))
+        ViewModelFactory(Injection.provideRepository(this))
     }
 
     private var eventEntity: com.jayfm.dicodingevent.data.local.entity.FavoriteEventEntity? = null
@@ -32,7 +32,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val eventId = intent.getStringExtra(EXTRA_EVENT_ID)
-        if (eventId != null && viewModel.event.value == null) {
+        if (eventId != null) {
             viewModel.getDetailEvent(eventId)
         }
 
@@ -52,26 +52,29 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.event.observe(this) { event ->
-            displayDetail(event)
-            
-            eventEntity = com.jayfm.dicodingevent.data.local.entity.FavoriteEventEntity(
-                event.id, event.name, event.imageLogo, event.description, event.cityName, event.beginTime
-            )
-            
-            viewModel.getFavoriteById(event.id).observe(this) { fav ->
-                isFavorite = fav != null
-                updateFavoriteIcon()
-            }
-        }
-
-        viewModel.isLoading.observe(this) { isLoading ->
-            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-        }
-
-        viewModel.errorMessage.observe(this) { message ->
-            if (message != null) {
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        viewModel.eventResult.observe(this) { result ->
+            when (result) {
+                is com.jayfm.dicodingevent.data.Result.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is com.jayfm.dicodingevent.data.Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    val event = result.data
+                    displayDetail(event)
+                    
+                    eventEntity = com.jayfm.dicodingevent.data.local.entity.FavoriteEventEntity(
+                        event.id, event.name, event.imageLogo, event.description, event.cityName, event.beginTime
+                    )
+                    
+                    viewModel.getFavoriteById(event.id).observe(this) { fav ->
+                        isFavorite = fav != null
+                        updateFavoriteIcon()
+                    }
+                }
+                is com.jayfm.dicodingevent.data.Result.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

@@ -10,26 +10,13 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel(private val repository: EventRepository) : ViewModel() {
 
-    private val _event = MutableLiveData<ListEventsItem>()
-    val event: LiveData<ListEventsItem> = _event
-
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-
-    private val _errorMessage = MutableLiveData<String?>()
-    val errorMessage: LiveData<String?> = _errorMessage
+    private val _eventResult = MutableLiveData<com.jayfm.dicodingevent.data.Result<com.jayfm.dicodingevent.data.remote.response.ListEventsItem>>()
+    val eventResult: LiveData<com.jayfm.dicodingevent.data.Result<com.jayfm.dicodingevent.data.remote.response.ListEventsItem>> = _eventResult
 
     fun getDetailEvent(id: String) {
-        _isLoading.value = true
-        _errorMessage.value = null
         viewModelScope.launch {
-            try {
-                val response = repository.getDetailEvent(id)
-                _event.value = response.event
-            } catch (e: Exception) {
-                _errorMessage.value = e.message
-            } finally {
-                _isLoading.value = false
+            repository.getDetailEvent(id).collect { result ->
+                _eventResult.value = result
             }
         }
     }

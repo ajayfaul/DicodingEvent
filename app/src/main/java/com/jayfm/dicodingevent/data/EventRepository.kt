@@ -1,14 +1,42 @@
 package com.jayfm.dicodingevent.data
 
 import com.jayfm.dicodingevent.data.remote.retrofit.ApiService
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.Flow
 
 class EventRepository private constructor(
     private val apiService: ApiService,
     private val favoriteEventDao: com.jayfm.dicodingevent.data.local.room.FavoriteEventDao
 ) {
-    suspend fun getUpcomingEvents() = apiService.getEvents(active = 1)
-    suspend fun getFinishedEvents() = apiService.getEvents(active = 0)
-    suspend fun getDetailEvent(id: String) = apiService.getDetailEvent(id)
+    fun getUpcomingEvents(): Flow<Result<List<com.jayfm.dicodingevent.data.remote.response.ListEventsItem>>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getEvents(active = 1)
+            emit(Result.Success(response.listEvents))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun getFinishedEvents(): Flow<Result<List<com.jayfm.dicodingevent.data.remote.response.ListEventsItem>>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getEvents(active = 0)
+            emit(Result.Success(response.listEvents))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun getDetailEvent(id: String): Flow<Result<com.jayfm.dicodingevent.data.remote.response.ListEventsItem>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getDetailEvent(id)
+            emit(Result.Success(response.event))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
     suspend fun searchEvents(query: String) = apiService.getEvents(active = -1, query = query)
 
     fun getFavoriteEvents() = favoriteEventDao.getAllFavoriteEvents()
